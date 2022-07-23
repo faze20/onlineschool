@@ -4,42 +4,45 @@ const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 
 const handler = async (req , res) => {
-    if (req.body.input.password != req.body.input.confirmPassword) {
-        res.json({message: 'Password Mismatch'})
-    } else {
-        try {
-            const client = await clientPromise
-            const db = client.db("sidehussleusers")
-            const emailExist = await db.collection("sydusers").find({email:req.body.input.email}).toArray()
-            if (emailExist[0].email === req.body.input.email){
-                const usernameExist = await db.collection("sydusers").find({userName:req.body.input.userName}).toArray()
-                if (usernameExist[0].userName === req.body.input.userName ) {
-                    const hashPassword = bcrypt.hashSync(req.body.input.password, salt);
-                    await db.collection("sydusers").insertOne({ 
-                        firstname:req.body.input.firstName,
-                        lastName: req.body.input.lastName,
-                        userName:req.body.input.userName, 
-                        email:req.body.input.email , 
-                        password:hashPassword ,
-                        state:req.body.input.state,
-                        city:req.body.input.city, 
-                        zip:req.body.input.zip,
-                        role:'user',
-                        messagesArrayList:[],
-                        savedArrayList:[]
-                    })
-                    res.json({message: `Welcome ${req.body.input.userName}`})
-                } else {
-                    res.json({message:`Username ${req.body.input.userName} already taken`} )
-                }
-            }else {
-                res.json({
-                    message:`Email ${req.body.input.email} already taken`
-                } )
-            }
-        } catch (error) {
-            res.json({message: error})
+    try {
+        const client = await clientPromise
+        const db = client.db("academy")
+        const emailExist = await db.collection("sdbytesacademy").find({email:req.body.registerInputs.email}).toArray()
+        const usernameExist = await db.collection("sdbytesacademy").find({userName:req.body.registerInputs.userName}).toArray()
+
+        if (emailExist.length >= 1) {
+            return res.json({
+                message:`Email ${req.body.registerInputs.email} already taken`
+            } )
         }
+        if (usernameExist.length >= 1) {
+            return res.json({
+                message:`Username ${req.body.registerInputs.userName} already taken`
+            } )
+        }
+        const hashPassword = bcrypt.hashSync(req.body.registerInputs.password, salt);
+        await db.collection("sdbytesacademy").insertOne({ 
+            firstName:req.body.registerInputs.firstName,
+            lastName: req.body.registerInputs.lastName,
+            userName:req.body.registerInputs.userName, 
+            email:req.body.registerInputs.email , 
+            password:hashPassword ,
+            state:req.body.registerInputs.state,
+            city:req.body.registerInputs.city, 
+            zip:req.body.registerInputs.zip,
+            messagesArrayList:[],
+            age:'',
+            grade:'',
+            class:'',
+            studyTime:'',
+            profilePhoto:'',
+            gender:''
+        })
+        return res.json({
+            message: `Welcome ${req.body.registerInputs.userName}`
+        } )
+    } catch (error) {
+        res.json({message: error})
     }
 }
     export default handler
