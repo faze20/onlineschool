@@ -4,7 +4,7 @@ import {Context} from "../context";
 
 
 function Login() {
-    const {loginInputs , handleLoginChange , loginSubmit } = useContext(Context);
+    const {loginInputs , handleLoginChange , loginSubmit ,loginErrorMessage } = useContext(Context);
 
   return (
     <div className='h-screen'>
@@ -29,7 +29,8 @@ function Login() {
                         type='password' name="password" placeholder='Enter Password' required
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     />
-                    <div className='text-right'>
+                    <div className='flex items-center justify-between'>
+                        {loginErrorMessage}
                         <Link href='/forgotpassword'>
                             <a className='text-xs italic text-gray-500 '> forgot password</a>
                         </Link>

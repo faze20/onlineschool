@@ -37,22 +37,19 @@ export const ContextProvider = (props) => {
             }
         } )
         const result = await userData.data
-        if(result.message){
+        if(typeof result.refreshToken === 'undefined' || result.refreshToken === null){
             console.log(result.message)
-            return setloginErrorMessage(result.message)
-        }
-        console.log(result)
-        try {
+            setloginErrorMessage(result.message)
+        }else{
             const decoded = jwt.verify(result.token, JWT_SECRET);
             setCookie('refreshToken', result.refreshTToken, {
                 httpOnly: true,
-                maxAge: 7 * 24 * 60 * 60 * 1000 //7 days
+                maxAge: 7 * 24 * 60 * 60 * 1000 
             });
-            console.log(decoded)
-            // setloginErrorMessage(result.message)
-        } catch (error) {
-            console.log(error)
+            setloginErrorMessage(result.message)
+            console.log(result.token)
         }
+
     }
     const registerSubmit = async (e) => {
         e.preventDefault()
@@ -80,7 +77,8 @@ export const ContextProvider = (props) => {
         loginSubmit,
         registerSubmit,
         registrationMessage,
-        clearRegMessage
+        clearRegMessage,
+        loginErrorMessage
         }
 
     return (

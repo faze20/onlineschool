@@ -142,7 +142,7 @@ function Register() {
                 <button
                     type="submit"
                     className="text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 duration-300 hover:tracking-[0.5em] font-medium rounded-lg text-2xl px-5 py-1.5 text-center mr-2 mb-2">
-                    Submit
+                    Create Account
                 </button>
             </form>
         </div>
