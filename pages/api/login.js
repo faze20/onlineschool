@@ -18,30 +18,26 @@ const handler = async (req , res) => {
     if(req.method === 'POST'){
         try {
             const client = await clientPromise
-            const db = client.db("sidehussleusers")
-            const userExist = await db.collection("sydusers").find({email:req.body.input.email}).toArray()
-            if(userExist[0].email != req.body.input.email ){
-                return res.status(400).send({
+            const db = client.db("academy")
+            const emailExist = await db.collection("sdbytesacademy").find({email:req.body.loginInputs.email}).toArray()
+            if(emailExist.length === 0 ){
+                return res.status(400).json({
                     message: 'Invalid credentials'
                 })
             }
-            if (!bcrypt.compareSync(req.body.input.password, userExist[0].password)) {
-                return res.status(400).send({
+            if (!bcrypt.compareSync(req.body.loginInputs.password, emailExist[0].password)) {
+                return res.status(400).json({
                     message: 'Invalid credentials'
                 })
             }
             const refreshToken = jwt.sign({
-                id: userExist[0]._id
+                id: emailExist[0]._id
             }, process.env.JWT_SECRET, {expiresIn: '1w'});
 
-            res.cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                maxAge: 7 * 24 * 60 * 60 * 1000 //7 days
-            });
             const expired_at = new Date();
             const tokenLifespan = expired_at.setDate(expired_at.getDate() + 7);
 
-            await db.collection("sydusers").updateOne({email:req.body.email},
+            await db.collection("sdbytesacademy").updateOne({email:req.body.loginInputs.email},
                 {
                     $set:{
                         refreshToken:refreshToken,
@@ -49,24 +45,15 @@ const handler = async (req , res) => {
                     }
             })
             const token = jwt.sign({
-                id: user.id
+                id: emailExist[0]._id
             },  process.env.JWT_SECRET, {expiresIn: '30s'});
+            console.log(token)
         
-            res.send({
-                token
+            res.json({
+                token,
+                refreshToken
+                
             });
-
-
-            //     if(bcrypt.compareSync(req.body.input.password, userExist[0].password)){
-            //         const token = generateAccessToken({username:userExist[0].userName, city:userExist[0].city ,state:userExist[0].state, role:userExist[0].role })
-            //         res.json({token:token , messageCount:userExist[0].messagesArrayList.length , saved:userExist[0].savedArrayList.length})
-            //     }else{
-            //         res.json({message:'Wrong password '})
-            //     }
-            // }
-            // else {
-            //     res.json({message:'Email not valid'})
-            // }
 
         } catch (error) {
             res.json({message:error.message})
