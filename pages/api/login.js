@@ -2,18 +2,6 @@ import clientPromise from '../../data/mongodata';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-function generateAccessToken({username,state,city , role}) {
-    return jwt.sign(
-        {
-           username,
-           state,
-           city,
-           role,
-          },
-        process.env.JWT_SECRET, 
-        { expiresIn: '86400s' }
-    );
-  }
 const handler = async (req , res) => {
     if(req.method === 'POST'){
         try {
@@ -60,4 +48,9 @@ const handler = async (req , res) => {
         }
     }
 }
+
+
+
+
+
 export default handler
