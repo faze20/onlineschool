@@ -2,11 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useContext , useRef } from 'react';
 import {useOutsideClick } from './InfoBox';
+import {Context} from "../context";
 
 
 
 function Nav() {
-    const [isLoggedIn, setisLoggedIn] = useState(false)
+    const {logout, authenticated ,user } = useContext(Context);
     const [showFlagMenu, setShowFlagMenu ] = useState(false)
 
     const dropFlagMenu = ()=>{
@@ -34,7 +35,9 @@ function Nav() {
                     </a>
                 </Link>
                 <div>
-                    <p className='font-bold italic text-2xl '>Aca<span className='text-orange-300'>demy</span> </p>
+                    <p className='font-bold italic text-2xl '>Aca<span className='text-orange-300'>demy</span>
+                   
+                     </p>
                 </div>
             </div>
             <div>
@@ -119,18 +122,23 @@ function Nav() {
 
                 </div>
                 <div className='right-0'>
-                    {isLoggedIn ? 
+                    {
+                    // authenticated
+                    user.userName
+                     ? 
                         <div className="flex justify-end">
                             <div>
-                                <Link href='/profile/classes'>
+                                 {/* //add query username */}
+                                <Link href='/profile/classes'> 
                                     <a className='bg-green-900 p-1 mr-4 rounded'>Classes</a>
                                 </Link>
                             </div>
                             <div>
                                 <Link href='/profile'>
-                                    <a className='border border-green-900 p-1 mr-2 rounded'>Profile</a>
+                                    <a className='border border-green-900 p-1 mr-2 rounded'>{user.userName}&apos;s Profile</a>
                                 </Link>
                             </div>
+                            <div> <button onClick={logout} className=' border p-1 '>Logout</button></div>
                         </div>
                     : 
                         <div className="flex justify-end">

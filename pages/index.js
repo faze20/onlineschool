@@ -10,14 +10,22 @@ export default function Home() {
           <title>Coding for Kids</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className='flex justify-center relative'>
+        <div className='flex  h-screen justify-center relative'>
            <Link href='/'> 
-              <a className='bg-black'>
+              <a 
+              className='relative w-full h-3/4 border border-gray-200 rounded-md overflow-hidden bg-black'
+              // className='bg-black '
+              >
                   <Image
                   src='/homePhoto.jpg'    
                   alt="logo" 
-                  width={1080}
-                  height={700}
+                  // width={1280}
+                  // height={400}
+                  // layout='responsive'
+                  // objectFit='contain'
+                  layout="fill"
+                  objectFit="cover"
+                  quality={100}
                   className='bg-blend-overlay bg-black opacity-60'
                   />
               </a>

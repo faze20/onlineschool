@@ -1,6 +1,8 @@
 import  { useState,useEffect ,  createContext } from "react";
-import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
 
+import Cookies from 'js-cookie'
+import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+import cookie from 'cookie'
 import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
@@ -11,6 +13,8 @@ export const Context = createContext();
 
 export const ContextProvider = (props) => {
     const router = useRouter()
+    const [authenticated, setAuthenticated] = useState(false)
+    const [user, setUser] = useState({id:'', firstName:'',userName:''})
     const [loginErrorMessage ,setloginErrorMessage] = useState('')
     const [registrationMessage ,setregistrationMessage] = useState('')
     const [loginInputs, setloginInputs] = useState({ email: '', password : ''});
@@ -28,13 +32,16 @@ export const ContextProvider = (props) => {
         ...registerInputs,
         [e.currentTarget.name]: e.currentTarget.value
     }); 
+
     const loginSubmit = async (e)=>{ 
         e.preventDefault()
+        const expireIN = new Date(new Date().getTime() + 2 * 60 * 1000);
         const userData = await axios.post('api/login' ,{ loginInputs } , {
             headers: {
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json"
-            }
+            },
+            withCredentials: true,
         } )
         const result = await userData.data
         if(typeof result.refreshToken === 'undefined' || result.refreshToken === null){
@@ -42,15 +49,42 @@ export const ContextProvider = (props) => {
             setloginErrorMessage(result.message)
         }else{
             const decoded = jwt.verify(result.token, JWT_SECRET);
-            setCookie('refreshToken', result.refreshTToken, {
-                httpOnly: true,
-                maxAge: 7 * 24 * 60 * 60 * 1000 
-            });
+            sessionStorage.setItem('sessionToken', result.token)
+            sessionStorage.setItem('user', decoded)
+            // setCookie('rfreshtokken',result.refreshToken , { maxAge: 60 * 60 * 24, HttpOnly: true });
+
+            // Cookies.set('refreshbacktoken', result.refreshToken, { expires: expireIN, path: '',  secure: true  })
+
+            setUser( {id:decoded.id, firstName:decoded.firstName,userName:decoded.userName})
             setloginErrorMessage(result.message)
+            setAuthenticated(true)
             console.log(result.token)
         }
 
     }
+
+    const authorisedUser = async ()=>{
+        const userAuth =  await axios.get('api/user')
+        const result = await userAuth.data
+        console.log(result.authenticated)
+
+    }
+    const logout = async ()=>{
+        const loggedOut = await axios.get('api/logout')
+        const result = await loggedOut.data
+        console.log(result.authenticated)
+        if(result.authenticated){
+            sessionStorage.removeItem('sessionToken');
+            sessionStorage.removeItem('user');
+            Cookies.remove('refreshbacktoken' , { path: '' })
+            setUser({id:'', firstName:'',userName:''})
+        } else {
+            alert('not logged out')
+        }
+
+        // router.reload()
+    }
+
     const registerSubmit = async (e) => {
         e.preventDefault()
         if(registerInputs.password != registerInputs.confirmPassword){
@@ -67,6 +101,17 @@ export const ContextProvider = (props) => {
         setregistrationMessage(registeruser.message)
         setregisterInputs({firstName:'',lastName:'',userName:'',state:'',city:'',zip:'', email: '', password : '',confirmPassword : '' });
     }
+    useEffect(() => {
+        authorisedUser()
+        if (sessionStorage.getItem('user')) {
+            setUser({id:sessionStorage.getItem('user').id, firstName:sessionStorage.getItem('user').firstName,userName:sessionStorage.getItem('user').userName})
+
+            setAuthenticated(true)
+        } else {
+            setAuthenticated(false)
+        }
+
+    }, [])
 
 
     const value = {
@@ -78,7 +123,10 @@ export const ContextProvider = (props) => {
         registerSubmit,
         registrationMessage,
         clearRegMessage,
-        loginErrorMessage
+        loginErrorMessage,
+        logout,
+        authenticated,
+        user
         }
 
     return (
