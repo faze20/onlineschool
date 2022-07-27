@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useContext , useRef } from 'react';
+import { BsList } from "react-icons/bs";
 import {useOutsideClick } from './InfoBox';
 import {Context} from "../context";
 
@@ -41,28 +42,34 @@ function Nav() {
                 </div>
             </div>
             <div>
-                <div className='flex  items-center text-sm mb-2'>
-                    <div>
-                        <Link href='/'>
-                            <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Home</a>
-                        </Link>
+                <div className='flex items-center text-sm mb-2'>
+                    <div className='hidden lg:flex lg:items-center '>
+                        <div>
+                            <Link href='/'>
+                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Home</a>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href='/curriculum'>
+                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Curriculum</a>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href='/contact'>
+                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Contact Us</a>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href='/about'>
+                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>About Us</a>
+                            </Link>
+                        </div>
+
                     </div>
-                    <div>
-                        <Link href='/curriculum'>
-                            <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Curriculum</a>
-                        </Link>
-                    </div>
-                    <div>
-                        <Link href='/contact'>
-                            <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Contact Us</a>
-                        </Link>
-                    </div>
-                    <div>
-                        <Link href='/about'>
-                            <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>About Us</a>
-                        </Link>
-                    </div>
-                    <div >
+                    <div className='flex items-center '>
+                        <div className='lg:hidden '>
+                            <BsList  className='text-2xl'/>
+                        </div>
                         <span
                         ref={flagRef}
                         onClick={dropFlagMenu}  >
@@ -70,8 +77,8 @@ function Nav() {
                                 <Image
                                 src='/usa.png'    
                                 alt="logo" 
-                                width={30}
-                                height={30}
+                                width={20}
+                                height={20}
                                 />
                             </a>                              
                         </span>
@@ -141,15 +148,15 @@ function Nav() {
                             <div> <button onClick={logout} className=' border p-1 '>Logout</button></div>
                         </div>
                     : 
-                        <div className="flex justify-end">
+                        <div className="flex flex-col lg:flex-row justify-end">
                             <div>
                                 <Link href='/login'>
-                                    <a className='bg-orange-400 py-1 px-4 text-gray-100 hover:bg-gray-300 duration-300 hover:text-black mr-4 rounded'>Login</a>
+                                    <a className='bg-orange-400 text-xs lg:text-base py-1 px-4 text-gray-100 hover:bg-gray-300 duration-300 hover:text-black mr-4 rounded'>Login</a>
                                 </Link>
                             </div>
                             <div>
                                 <Link href='/register'>
-                                    <a className='border border-orange-400 text-sm hover:bg-gray-300  duration-300 p-1 rounded'>Create Account</a>
+                                    <a className='border border-orange-400 text-xs lg:text-sm hover:bg-gray-300  duration-300 p-1 rounded'>Create Account</a>
                                 </Link>
                             </div>
                         </div>
