@@ -14,7 +14,7 @@ export const Context = createContext();
 export const ContextProvider = (props) => {
     const router = useRouter()
     const [authenticated, setAuthenticated] = useState(false)
-    const [user, setUser] = useState({id:'', firstName:'',userName:''})
+    const [user, setUser] = useState({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
     const [loginErrorMessage ,setloginErrorMessage] = useState('')
     const [registrationMessage ,setregistrationMessage] = useState('')
     const [loginInputs, setloginInputs] = useState({ email: '', password : ''});
@@ -44,21 +44,15 @@ export const ContextProvider = (props) => {
             withCredentials: true,
         } )
         const result = await userData.data
-        if(typeof result.refreshToken === 'undefined' || result.refreshToken === null){
-            console.log(result.message)
-            setloginErrorMessage(result.message)
+        if(typeof result.userName === 'undefined' || result.userName === null){
+            setloginErrorMessage("Unable to sign in Try again")
         }else{
-            const decoded = jwt.verify(result.token, JWT_SECRET);
-            sessionStorage.setItem('sessionToken', result.token)
-            sessionStorage.setItem('user', decoded)
-            // setCookie('rfreshtokken',result.refreshToken , { maxAge: 60 * 60 * 24, HttpOnly: true });
-
-            // Cookies.set('refreshbacktoken', result.refreshToken, { expires: expireIN, path: '',  secure: true  })
-
-            setUser( {id:decoded.id, firstName:decoded.firstName,userName:decoded.userName})
+            sessionStorage.setItem('accessTokenLifespan', result.accessTokenLifespan)
+            sessionStorage.setItem('userName', result.userName)
+            sessionStorage.setItem('refeshTokenLifespan', result.refeshTokenLifespan)
+            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName})
             setloginErrorMessage(result.message)
-            setAuthenticated(true)
-            console.log(result.token)
+            console.log(result.accessTokenLifespan)
         }
 
     }
@@ -66,23 +60,21 @@ export const ContextProvider = (props) => {
     const authorisedUser = async ()=>{
         const userAuth =  await axios.get('api/user')
         const result = await userAuth.data
+
         console.log(result.authenticated)
 
     }
     const logout = async ()=>{
         const loggedOut = await axios.get('api/logout')
         const result = await loggedOut.data
-        console.log(result.authenticated)
-        if(result.authenticated){
-            sessionStorage.removeItem('sessionToken');
-            sessionStorage.removeItem('user');
-            Cookies.remove('refreshbacktoken' , { path: '' })
-            setUser({id:'', firstName:'',userName:''})
+        if(result.message === 'logged out'){
+            sessionStorage.removeItem('accessTokenLifespan');
+            sessionStorage.removeItem('refeshTokenLifespan');
+            sessionStorage.removeItem('userName');
+            setUser({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
         } else {
-            alert('not logged out')
+           console.log(result.message)
         }
-
-        // router.reload()
     }
 
     const registerSubmit = async (e) => {
@@ -101,16 +93,18 @@ export const ContextProvider = (props) => {
         setregistrationMessage(registeruser.message)
         setregisterInputs({firstName:'',lastName:'',userName:'',state:'',city:'',zip:'', email: '', password : '',confirmPassword : '' });
     }
+    // setTimeout(()=>{
+        
+    //     console.log(user.refeshTokenLifespan , user.userName)
+    // },3000 )
     useEffect(() => {
         authorisedUser()
-        if (sessionStorage.getItem('user')) {
-            setUser({id:sessionStorage.getItem('user').id, firstName:sessionStorage.getItem('user').firstName,userName:sessionStorage.getItem('user').userName})
-
+        if (sessionStorage.getItem('userName')) {
+            setUser({refeshTokenLifespan:sessionStorage.getItem('refeshTokenLifespan'), accessTokenLifespan:sessionStorage.getItem('accessTokenLifespan'),userName:sessionStorage.getItem('userName')})
             setAuthenticated(true)
         } else {
             setAuthenticated(false)
         }
-
     }, [])
 
 

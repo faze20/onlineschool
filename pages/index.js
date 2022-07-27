@@ -26,6 +26,7 @@ export default function Home() {
                   layout="fill"
                   objectFit="cover"
                   quality={100}
+                  priority
                   className='bg-blend-overlay bg-black opacity-60'
                   />
               </a>

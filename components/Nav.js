@@ -37,7 +37,6 @@ function Nav() {
                 </Link>
                 <div>
                     <p className='font-bold italic text-2xl '>Aca<span className='text-orange-300'>demy</span>
-                   
                      </p>
                 </div>
             </div>
