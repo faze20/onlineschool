@@ -1,4 +1,3 @@
-// import type { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '../../data/mongodata';
 import cookie from 'cookie'
 
@@ -22,125 +21,86 @@ const handler = async (req , res) => {
                 message: 'Invalid credentialsP'
             })
         }
+        const expired_at = new Date('March 13, 08 04:20');
+        const accessTokenLifespan = expired_at.getMinutes();
+        const refeshTokenLifespan = expired_at.getMinutes() + 30 ;
         const token = jwt.sign({
             id: emailExist[0]._id,
             userName:emailExist[0].userName,
             firstName:emailExist[0].firstName
-        },  process.env.JWT_SECRET, {expiresIn: '30s'});
+        },  process.env.JWT_SECRET, {expiresIn: '900s'});
 
-        const expired_at = new Date('March 13, 08 04:20');
-        const accessTokenLifespan = expired_at.getMinutes();
-
-        const refreshToken = jwt.sign({
-            id: emailExist[0]._id,
-            userName:emailExist[0].userName,
-            firstName:emailExist[0].firstName
-        }, process.env.JWT_SECRET, {expiresIn: '1w'});
-
-        const refeshTokenLifespan = expired_at.getMinutes() + 30 ;
-        //  expired_at.setDate(expired_at.getDate() + 5);
-
-        res.setHeader('Set-Cookie',
-        [
-            cookie.serialize('accessToken', (token), {
-               httpOnly: true,
-               maxAge: 60 * 5,
-               path:'/',
-               secure: process.env.NODE_ENV !== 'development',
-               sameSite: 'strict',
-             }),
-             cookie.serialize('refreshToken', (refreshToken), {
-                httpOnly: true,
-                maxAge: 60 * 60 * 24 * 3 ,
-                path:'/',
-                secure: process.env.NODE_ENV !== 'development',
-                sameSite: 'strict',
-              })
-        ]
-        );
-
-        res.json({
-            refeshTokenLifespan,
-            accessTokenLifespan,
-            userName:emailExist[0].userName,
-            message:'login sucess with fresh token'
-        });
-
-        // res.setHeader('Set-Cookie',
-        // [
-        //     cookie.serialize('accessToken', (token), {
-        //        httpOnly: true,
-        //        maxAge: 60 * 5,
-        //        path:'/',
-        //        secure: process.env.NODE_ENV !== 'development',
-        //        sameSite: 'strict',
-        //        // maxAge: 60 * 60 * 24 * 7 // 1 week
-        //      }),
-        //      cookie.serialize('refreshToken', (token), {
-        //         httpOnly: true,
-        //         maxAge: 60 * 5,
-        //         path:'/',
-        //         secure: process.env.NODE_ENV !== 'development',
-        //         sameSite: 'strict',
-        //         // maxAge: 60 * 60 * 24 * 7 // 1 week
-        //       })
-
-
-        // ]
-        
-        // );
-
-        // if( typeof emailExist[0].refreshToken === 'undefined' || emailExist[0].refreshToken === null){
-        //     const refreshToken = jwt.sign({
-        //         id: emailExist[0]._id,
-        //         userName:emailExist[0].userName,
-        //         firstName:emailExist[0].firstName
-        //     }, process.env.JWT_SECRET, {expiresIn: '1w'});
-
-        //     const expired_at = new Date();
-        //     const tokenLifespan = expired_at.setDate(expired_at.getDate() + 7);
-
-        //     res.setHeader('Set-Cookie',
-        //     [
-        //         cookie.serialize('accessToken', (token), {
-        //            httpOnly: true,
-        //            maxAge: 60 * 5,
-        //            path:'/',
-        //            secure: process.env.NODE_ENV !== 'development',
-        //            sameSite: 'strict',
-        //          }),
-        //          cookie.serialize('refreshToken', (refreshToken), {
-        //             httpOnly: true,
-        //             maxAge: 60 * 5,
-        //             path:'/',
-        //             secure: process.env.NODE_ENV !== 'development',
-        //             sameSite: 'strict',
-        //           })
+        if( typeof emailExist[0].refreshToken === 'undefined' || emailExist[0].refreshToken === null){
+            const refreshToken = jwt.sign({
+                id: emailExist[0]._id,
+                userName:emailExist[0].userName,
+                firstName:emailExist[0].firstName
+            }, process.env.JWT_SECRET, {expiresIn: '1w'});
     
+            await db.collection("sdbytesacademy").updateOne({email:req.body.loginInputs.email},
+                {
+                    $set:{
+                        refreshToken:refreshToken,
+                    }
+            })
     
-        //     ]
-            
-        //     );
-        //     await db.collection("sdbytesacademy").updateOne({email:req.body.loginInputs.email},
-        //         {
-        //             $set:{
-        //                 refreshToken:refreshToken,
-        //                 tokenLifespan:tokenLifespan
-        //             }
-        //     })
-        //     res.json({
-        //         token,
-        //         refreshToken,
-        //         message:'login sucess with fresh token'
-        //     });
-        // }else {
+            res.setHeader('Set-Cookie',
+            [
+                cookie.serialize('accessToken', (token), {
+                //    httpOnly: true,
+                   maxAge: 60 * 14,
+                   path:'/',
+                   secure: process.env.NODE_ENV !== 'development',
+                   sameSite: 'strict',
+                 }),
+                 cookie.serialize('refreshToken', (refreshToken), {
+                    httpOnly: true,
+                    maxAge: 60 * 60 * 24 * 3 ,
+                    path:'/',
+                    secure: process.env.NODE_ENV !== 'development',
+                    sameSite: 'strict',
+                  })
+            ]
+            );
+    
+            res.json({
+                refeshTokenLifespan :refeshTokenLifespan,
+                accessTokenLifespan : accessTokenLifespan,
+                token: token,
+                userName:emailExist[0].userName,
+                message:'login sucess with access token'
+            });
 
-        //     res.json({
-        //         token,
-        //         refreshToken:emailExist[0].refreshToken,
-        //         message:'login sucess with old token'
-        //     });
-        // }
+        } else {
+
+            res.setHeader('Set-Cookie',
+            [
+                cookie.serialize('accessToken', (token), {
+                //    httpOnly: true,
+                   maxAge: 60 * 14,
+                   path:'/',
+                   secure: process.env.NODE_ENV !== 'development',
+                   sameSite: 'strict',
+                 }),
+                 cookie.serialize('refreshToken', (emailExist[0].refreshToken), {
+                    httpOnly: true,
+                    maxAge: 60 * 60 * 24 * 3 ,
+                    path:'/',
+                    secure: process.env.NODE_ENV !== 'development',
+                    sameSite: 'strict',
+                  })
+            ]
+            );
+
+            res.json({
+                refeshTokenLifespan :refeshTokenLifespan ,
+                accessTokenLifespan :accessTokenLifespan ,
+                token: token,
+                userName:emailExist[0].userName,
+                message:'login sucess with refresh token'
+            });
+        }
+
     } catch (error) {
         res.json({message:error.message})
     }

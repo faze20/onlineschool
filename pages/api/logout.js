@@ -2,6 +2,10 @@ import cookie from "cookie";
 
 
 const handler = async (req , res) => {
+    const cookies = cookie.parse(req.headers.cookie || '');
+    if(typeof cookies.refreshToken === 'undefined' || cookies.refreshToken === null){
+        return res.json({message:'no user' })
+    }
     try {
         res.setHeader('Set-Cookie', [
             cookie.serialize('accessToken', '', {

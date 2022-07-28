@@ -1,4 +1,4 @@
-import  { useState,useEffect ,  createContext } from "react";
+import  { useState,useEffect ,  createContext, useRef } from "react";
 
 import Cookies from 'js-cookie'
 import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
@@ -13,8 +13,10 @@ export const Context = createContext();
 
 export const ContextProvider = (props) => {
     const router = useRouter()
-    const [authenticated, setAuthenticated] = useState(false)
-    const [user, setUser] = useState({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
+    let [user, setUser] = useState({refeshTokenLifespan:'', accessTokenLifespan:'',userName:'', userToken:''})
+    let [authTokens, setAuthTokens] = useState(()=>getCookie('accessToken') ? getCookie('accessToken')  : null )
+    let [loading, setLoading] = useState(true)
+    // let [authTokens, setAuthTokens] = useState(null JSON.parse(localStorage.getItem('authTokens')))
     const [loginErrorMessage ,setloginErrorMessage] = useState('')
     const [registrationMessage ,setregistrationMessage] = useState('')
     const [loginInputs, setloginInputs] = useState({ email: '', password : ''});
@@ -35,7 +37,6 @@ export const ContextProvider = (props) => {
 
     const loginSubmit = async (e)=>{ 
         e.preventDefault()
-        const expireIN = new Date(new Date().getTime() + 2 * 60 * 1000);
         const userData = await axios.post('api/login' ,{ loginInputs } , {
             headers: {
                 Accept: "application/json, text/plain, */*",
@@ -44,15 +45,20 @@ export const ContextProvider = (props) => {
             withCredentials: true,
         } )
         const result = await userData.data
+        console.log(result)
         if(typeof result.userName === 'undefined' || result.userName === null){
             setloginErrorMessage("Unable to sign in Try again")
         }else{
+            setAuthTokens(result.token)
             sessionStorage.setItem('accessTokenLifespan', result.accessTokenLifespan)
             sessionStorage.setItem('userName', result.userName)
+            sessionStorage.setItem('accessToken', result.token)
+
             sessionStorage.setItem('refeshTokenLifespan', result.refeshTokenLifespan)
-            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName})
+            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName, userToken:result.token})
             setloginErrorMessage(result.message)
             console.log(result.accessTokenLifespan)
+            router.push('/')
         }
 
     }
@@ -63,18 +69,6 @@ export const ContextProvider = (props) => {
 
         console.log(result.authenticated)
 
-    }
-    const logout = async ()=>{
-        const loggedOut = await axios.get('api/logout')
-        const result = await loggedOut.data
-        if(result.message === 'logged out'){
-            sessionStorage.removeItem('accessTokenLifespan');
-            sessionStorage.removeItem('refeshTokenLifespan');
-            sessionStorage.removeItem('userName');
-            setUser({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
-        } else {
-           console.log(result.message)
-        }
     }
 
     const registerSubmit = async (e) => {
@@ -93,19 +87,67 @@ export const ContextProvider = (props) => {
         setregistrationMessage(registeruser.message)
         setregisterInputs({firstName:'',lastName:'',userName:'',state:'',city:'',zip:'', email: '', password : '',confirmPassword : '' });
     }
-    // setTimeout(()=>{
-        
-    //     console.log(user.refeshTokenLifespan , user.userName)
-    // },3000 )
-    useEffect(() => {
-        authorisedUser()
-        if (sessionStorage.getItem('userName')) {
-            setUser({refeshTokenLifespan:sessionStorage.getItem('refeshTokenLifespan'), accessTokenLifespan:sessionStorage.getItem('accessTokenLifespan'),userName:sessionStorage.getItem('userName')})
-            setAuthenticated(true)
+
+    const logout = async ()=>{
+        const loggedOut = await axios.get('api/logout')
+        const result = await loggedOut.data
+        if(result.message === 'logged out'){
+            sessionStorage.removeItem('accessTokenLifespan');
+            sessionStorage.removeItem('refeshTokenLifespan');
+            sessionStorage.removeItem('userName');
+            setAuthTokens(null)
+            setUser({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
+            router.back()
         } else {
-            setAuthenticated(false)
+           console.log(result.message)
         }
-    }, [])
+    }
+
+    let updateToken = async ()=> {
+        console.log("update token called")
+        const userData = await axios.get('api/refresh' , {
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        } )
+
+        const result = await userData.data
+        
+        if (result.message === 'refresh api'){
+            setAuthTokens(result.token)
+            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName, userToken:result.token})
+            localStorage.setItem('authTokens', JSON.stringify(result.refeshTokenLifespan))
+        }else{
+            logout()
+        }
+
+        if(loading){
+            setLoading(false)
+        }
+    }
+
+
+
+
+    useEffect(() => {
+        if(loading){
+            updateToken()
+        }
+
+        let fourMinutes = 1000 * 60 * 4
+
+        let interval =  setInterval(()=> {
+            if(authTokens){
+                updateToken()
+                console.log("useeffect ran one more time")
+            }
+        }, fourMinutes)
+        return ()=> clearInterval(interval)
+
+
+    }, [authTokens , loading])
 
 
     const value = {
@@ -119,13 +161,12 @@ export const ContextProvider = (props) => {
         clearRegMessage,
         loginErrorMessage,
         logout,
-        authenticated,
         user
         }
 
     return (
         <Context.Provider  value ={value}>
-            {props.children}
+            { loading ? null : props.children}
         </Context.Provider>
     ) 
 }
