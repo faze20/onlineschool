@@ -16,7 +16,6 @@ export const ContextProvider = (props) => {
     let [user, setUser] = useState({refeshTokenLifespan:'', accessTokenLifespan:'',userName:'', userToken:''})
     let [authTokens, setAuthTokens] = useState(()=>getCookie('accessToken') ? getCookie('accessToken')  : null )
     let [loading, setLoading] = useState(true)
-    // let [authTokens, setAuthTokens] = useState(null JSON.parse(localStorage.getItem('authTokens')))
     const [loginErrorMessage ,setloginErrorMessage] = useState('')
     const [registrationMessage ,setregistrationMessage] = useState('')
     const [loginInputs, setloginInputs] = useState({ email: '', password : ''});
@@ -128,16 +127,11 @@ export const ContextProvider = (props) => {
         }
     }
 
-
-
-
     useEffect(() => {
         if(loading){
             updateToken()
         }
-
         let fourMinutes = 1000 * 60 * 4
-
         let interval =  setInterval(()=> {
             if(authTokens){
                 updateToken()
@@ -145,10 +139,7 @@ export const ContextProvider = (props) => {
             }
         }, fourMinutes)
         return ()=> clearInterval(interval)
-
-
     }, [authTokens , loading])
-
 
     const value = {
         loginInputs,
