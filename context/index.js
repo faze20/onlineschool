@@ -1,11 +1,6 @@
-import  { useState,useEffect ,  createContext, useRef } from "react";
-
-import Cookies from 'js-cookie'
-import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
-import cookie from 'cookie'
+import  { useState,useEffect ,  createContext} from "react";
+import {  getCookie } from 'cookies-next';
 import axios from 'axios';
-
-const jwt = require('jsonwebtoken');
 import { useRouter } from "next/router"
 
 export const Context = createContext();
@@ -70,7 +65,6 @@ export const ContextProvider = (props) => {
         setregisterInputs({firstName:'',lastName:'',userName:'',state:'',city:'',zip:'', email: '', password : '',confirmPassword : '' });
         router.push('/login')
     }
-
 
     const logout = async ()=>{
         const loggedOut = await axios.get('api/logout')

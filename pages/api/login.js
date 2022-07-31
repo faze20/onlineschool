@@ -53,9 +53,7 @@ const handler = async (req , res) => {
                     secure: process.env.NODE_ENV !== 'development',
                     sameSite: 'strict',
                   })
-            ]
-            );
-    
+            ] );
             res.json({
                 id:emailExist[0]._id,
                 userName:emailExist[0].userName,
@@ -63,7 +61,6 @@ const handler = async (req , res) => {
             });
 
         } else {
-
             res.setHeader('Set-Cookie',
             [
                 cookie.serialize('accessToken', (accessToken), {
@@ -80,16 +77,13 @@ const handler = async (req , res) => {
                     secure: process.env.NODE_ENV !== 'development',
                     sameSite: 'strict',
                   })
-            ]
-            );
-
+            ] );
             res.json({
                 id: emailExist[0]._id,
                 userName:emailExist[0].userName,
                 message:'login sucessfull Rtoken'
             });
         }
-
     } catch (error) {
         res.json({message:error.message})
     }

@@ -8,7 +8,6 @@ const handler = async (req , res) => {
         return res.json({message:'no user' })
     }else {
         const decoded = jwt.verify(cookies.refreshToken, process.env.JWT_SECRET);
-
         const newAccessToken = jwt.sign({
             id: decoded._id,
             userName:decoded.userName,
@@ -22,17 +21,12 @@ const handler = async (req , res) => {
                sameSite: 'strict',
              }),)
 
-
         res.json({
             id: decoded._id,
             userName:decoded.userName,
             message:'refresh api'
         });
-
     }
-
- 
-
 }
 
 export default handler ;
