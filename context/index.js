@@ -6,14 +6,13 @@ import cookie from 'cookie'
 import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587fe2f90a832bd3ff9d42710a4da095a2ce285b009f0c3730cd9b8e1af3eb84df6611'
 import { useRouter } from "next/router"
 
 export const Context = createContext();
 
 export const ContextProvider = (props) => {
     const router = useRouter()
-    let [user, setUser] = useState({refeshTokenLifespan:'', accessTokenLifespan:'',userName:'', userToken:''})
+    let [user, setUser] = useState({id:'', userName:''})
     let [authTokens, setAuthTokens] = useState(()=>getCookie('accessToken') ? getCookie('accessToken')  : null )
     let [loading, setLoading] = useState(true)
     const [loginErrorMessage ,setloginErrorMessage] = useState('')
@@ -23,7 +22,6 @@ export const ContextProvider = (props) => {
     const clearRegMessage = ()=>{
         router.push('/login')
         setregistrationMessage('')
-
     }
     const handleLoginChange = (e) => setloginInputs({
         ...loginInputs,
@@ -44,30 +42,15 @@ export const ContextProvider = (props) => {
             withCredentials: true,
         } )
         const result = await userData.data
-        console.log(result)
         if(typeof result.userName === 'undefined' || result.userName === null){
             setloginErrorMessage("Unable to sign in Try again")
         }else{
-            setAuthTokens(result.token)
-            sessionStorage.setItem('accessTokenLifespan', result.accessTokenLifespan)
+            setAuthTokens(getCookie('accessToken'))
             sessionStorage.setItem('userName', result.userName)
-            sessionStorage.setItem('accessToken', result.token)
-
-            sessionStorage.setItem('refeshTokenLifespan', result.refeshTokenLifespan)
-            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName, userToken:result.token})
+            setUser( { id:result.id, userName:result.userName})
             setloginErrorMessage(result.message)
-            console.log(result.accessTokenLifespan)
             router.push('/')
         }
-
-    }
-
-    const authorisedUser = async ()=>{
-        const userAuth =  await axios.get('api/user')
-        const result = await userAuth.data
-
-        console.log(result.authenticated)
-
     }
 
     const registerSubmit = async (e) => {
@@ -85,18 +68,17 @@ export const ContextProvider = (props) => {
         const registeruser = await registrationData.data;
         setregistrationMessage(registeruser.message)
         setregisterInputs({firstName:'',lastName:'',userName:'',state:'',city:'',zip:'', email: '', password : '',confirmPassword : '' });
+        router.push('/login')
     }
+
 
     const logout = async ()=>{
         const loggedOut = await axios.get('api/logout')
         const result = await loggedOut.data
         if(result.message === 'logged out'){
-            sessionStorage.removeItem('accessTokenLifespan');
-            sessionStorage.removeItem('refeshTokenLifespan');
             sessionStorage.removeItem('userName');
             setAuthTokens(null)
-            setUser({refeshTokenLifespan:'', accessTokenLifespan:'',userName:''})
-            router.back()
+            setUser({id:'', userName:''})
         } else {
            console.log(result.message)
         }
@@ -111,17 +93,14 @@ export const ContextProvider = (props) => {
             },
             withCredentials: true,
         } )
-
         const result = await userData.data
-        
         if (result.message === 'refresh api'){
-            setAuthTokens(result.token)
-            setUser( {refeshTokenLifespan:result.refeshTokenLifespan, accessTokenLifespan:result.accessTokenLifespan,userName:result.userName, userToken:result.token})
-            localStorage.setItem('authTokens', JSON.stringify(result.refeshTokenLifespan))
+            setAuthTokens(getCookie('accessToken'))
+            setUser( {  id:result.id, userName:result.userName})
+            sessionStorage.setItem('accessToken', getCookie('accessToken'))
         }else{
             logout()
         }
-
         if(loading){
             setLoading(false)
         }
@@ -131,7 +110,7 @@ export const ContextProvider = (props) => {
         if(loading){
             updateToken()
         }
-        let fourMinutes = 1000 * 60 * 4
+        let fourMinutes = 1000 * 60 * 13
         let interval =  setInterval(()=> {
             if(authTokens){
                 updateToken()

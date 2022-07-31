@@ -1,7 +1,5 @@
 import clientPromise from '../../data/mongodata';
 import cookie from 'cookie'
-
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -21,20 +19,15 @@ const handler = async (req , res) => {
                 message: 'Invalid credentialsP'
             })
         }
-        const expired_at = new Date('March 13, 08 04:20');
-        const accessTokenLifespan = expired_at.getMinutes();
-        const refeshTokenLifespan = expired_at.getMinutes() + 30 ;
-        const token = jwt.sign({
+
+        const accessToken = jwt.sign({
             id: emailExist[0]._id,
-            userName:emailExist[0].userName,
-            firstName:emailExist[0].firstName
         },  process.env.JWT_SECRET, {expiresIn: '900s'});
 
         if( typeof emailExist[0].refreshToken === 'undefined' || emailExist[0].refreshToken === null){
             const refreshToken = jwt.sign({
                 id: emailExist[0]._id,
                 userName:emailExist[0].userName,
-                firstName:emailExist[0].firstName
             }, process.env.JWT_SECRET, {expiresIn: '1w'});
     
             await db.collection("sdbytesacademy").updateOne({email:req.body.loginInputs.email},
@@ -46,10 +39,10 @@ const handler = async (req , res) => {
     
             res.setHeader('Set-Cookie',
             [
-                cookie.serialize('accessToken', (token), {
+                cookie.serialize('accessToken', (accessToken), {
                 //    httpOnly: true,
-                   maxAge: 60 * 14,
-                   path:'/',
+                    maxAge: 60 * 15,
+                    path:'/',
                    secure: process.env.NODE_ENV !== 'development',
                    sameSite: 'strict',
                  }),
@@ -64,20 +57,18 @@ const handler = async (req , res) => {
             );
     
             res.json({
-                refeshTokenLifespan :refeshTokenLifespan,
-                accessTokenLifespan : accessTokenLifespan,
-                token: token,
+                id:emailExist[0]._id,
                 userName:emailExist[0].userName,
-                message:'login sucess with access token'
+                message:'login sucessfull Atoken'
             });
 
         } else {
 
             res.setHeader('Set-Cookie',
             [
-                cookie.serialize('accessToken', (token), {
+                cookie.serialize('accessToken', (accessToken), {
                 //    httpOnly: true,
-                   maxAge: 60 * 14,
+                   maxAge: 60 * 15,
                    path:'/',
                    secure: process.env.NODE_ENV !== 'development',
                    sameSite: 'strict',
@@ -93,11 +84,9 @@ const handler = async (req , res) => {
             );
 
             res.json({
-                refeshTokenLifespan :refeshTokenLifespan ,
-                accessTokenLifespan :accessTokenLifespan ,
-                token: token,
+                id: emailExist[0]._id,
                 userName:emailExist[0].userName,
-                message:'login sucess with refresh token'
+                message:'login sucessfull Rtoken'
             });
         }
 
