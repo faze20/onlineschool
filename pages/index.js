@@ -160,13 +160,11 @@ export default function Home() {
                     <h2>Live online/ In-person</h2>
                     <p>1-3hrs a day/Half or Full Day</p>
                     <p>One week, Mon-Fri</p>
-
                   </div>
                   <div>
                     <p>Starting at $200 /2.5hr a day</p>
                     <p>Starting at $3000 /2.5hr a day</p>
                   </div>
-
             </div>
             <div className='text-center flex flex-col'>
                <Image
@@ -221,6 +219,47 @@ export default function Home() {
                   </div>
             </div>
           </div>
+
+          <div className='px-24 mt-16 '>
+          {/* explore more with coding */}
+            <div className=''>
+                <div><h2 className='text-xl text-gray-400 mb-6'>Explore more in coding and tech</h2></div>
+                <div className="flex  overflow-x-auto ">
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Coding Camps</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Beginner Coding</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">C#</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Computer Programming</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">C++</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Python Coding</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Javascript</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Hacking</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Apps</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Artificial Intelligence</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100">Computer Science</div>
+                </div>
+            </div>
+            {/* explore more with coding */}
+
+            {/* newslettter */}
+            <div className=' mt-16'>
+                <h2 className='font-semibold text-xl'>Stay in the know on all of our programs and announcements:</h2>
+              <form className='flex justify-between '>
+                <div>
+                  <input type="text" placeholder='First Name' />
+                </div>
+                <div>
+                  <input type="text" placeholder='Email' />
+                </div>
+                <div><button className='bg-gray-300 p-2 text-xl rounded'>Sign Up</button></div>
+              </form>
+            </div>
+            {/* newslettter */}
+
+          </div>
+
+
+
+
         </div>
 
    </div>
