@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Carousel from '../components/Carousel'
 
 
 export default function Home() {
@@ -14,7 +15,6 @@ export default function Home() {
            <Link href='/'> 
               <a 
               className='relative w-full h-3/4 border border-gray-200 rounded-md overflow-hidden bg-black'
-              // className='bg-black '
               >
                   <Image
                   src='/homePhoto.jpg'    
@@ -55,7 +55,6 @@ export default function Home() {
                             Private Classes
                           </a>
                       </Link>
-
                   </div>
                 </div>
               </div>
@@ -76,7 +75,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <div className='flex justify-between mt-4 mx-24 border-b border-gray-200 pb-12 mb-4 '>
@@ -149,8 +147,8 @@ export default function Home() {
                   height={200}
                   />
                   <div className='bg-yellow-400'>
-                    <h1>Coders Pathway</h1>
-                    <h2 className='font-semibold text-4xl'>Camps</h2>
+                    <h1>Javascript Pathway</h1>
+                    <h2 className='font-semibold text-4xl'>Javascript</h2>
                   </div>
                   <div>
                     <p>Offered during school breaks</p>
@@ -174,8 +172,8 @@ export default function Home() {
                   height={200}
                   />
                   <div className='bg-yellow-400'>
-                    <h1>Coders Pathway</h1>
-                    <h2 className='font-semibold text-4xl'>Classes</h2>
+                    <h1>Python Pathway</h1>
+                    <h2 className='font-semibold text-4xl'>Python Intro</h2>
                   </div>
                   <div>
                     <h2>Live online</h2>
@@ -200,8 +198,8 @@ export default function Home() {
                   height={200}
                   />
                   <div className='bg-yellow-400'>
-                    <h1>Coders Pathway</h1>
-                    <h2 className='font-semibold text-4xl'>Camps</h2>
+                    <h1>Web Design</h1>
+                    <h2 className='font-semibold text-4xl'>Websites</h2>
                   </div>
                   <div>
                     <p>Offered during school breaks</p>
@@ -222,38 +220,83 @@ export default function Home() {
 
           <div className='px-24 mt-16 '>
           {/* explore more with coding */}
-            <div className=''>
+            <div className='relative '>
                 <div><h2 className='text-xl text-gray-400 mb-6'>Explore more in coding and tech</h2></div>
-                <div className="flex  overflow-x-auto ">
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Coding Camps</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Beginner Coding</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">C#</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Computer Programming</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">C++</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Python Coding</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Javascript</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Hacking</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Apps</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2">Artificial Intelligence</div>
-                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100">Computer Science</div>
+                <div className="flex  w-full overflow-x-auto no-scrollbar p-2 bg-gray-100 rounded mx-2 " title='click then use keyboard arrows to scroll'>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Coding Camps</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Beginner Coding</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">C#</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Computer Programming</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">C++</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Python Coding</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Javascript</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Hacking</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Apps</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 mr-2 flex-none">Artificial Intelligence</div>
+                  <div className="flex items-center justify-center text-base p-2 bg-gray-300 rounded-full border-2 hover:border-blue-500 hover:bg-blue-100 flex-none">Computer Science</div>
+                  <div className='absolute top-16 right-1 z-10'><span title='click then use keyboard arrows to scroll' className='font-bold text-base  bg-gray-600 text-white  border-2 border-black rounded-full'> &#62;</span></div>
                 </div>
             </div>
             {/* explore more with coding */}
 
             {/* newslettter */}
             <div className=' mt-16'>
-                <h2 className='font-semibold text-xl'>Stay in the know on all of our programs and announcements:</h2>
+                <h2 className='font-semibold text-xl mb-8'>Stay in the know on all of our programs and announcements:</h2>
               <form className='flex justify-between '>
-                <div>
-                  <input type="text" placeholder='First Name' />
+                <div className='w-full border border-gray-300 rounded p-1'>
+                  <input
+                  className='w-full p-2 outline-none '
+                  type="text" placeholder='First Name' />
                 </div>
-                <div>
-                  <input type="text" placeholder='Email' />
+                <div className='w-full border border-gray-300 rounded p-1 mx-8'>
+                  <input
+                   className='w-full p-2 outline-none '
+                  type="text" placeholder='Email' />
                 </div>
-                <div><button className='bg-gray-300 p-2 text-xl rounded'>Sign Up</button></div>
+                <div className='w-full'>
+                  <button type='submit' className='bg-green-700 text-white hover:bg-green-500 p-3 text-xl rounded'>Sign Up</button>
+                </div>
               </form>
             </div>
             {/* newslettter */}
+
+            {/* video tutorials */}
+            <div className='mt-8'>
+              <div>
+                <h2 className='font-bold text-3xl text-center mb-12'>Video Tutorials</h2>
+              </div>
+              <div>
+                <div className='flex justify-around'>
+                  <div >
+                  <video 
+                  className='h-1/2 w-56'
+                  controls autoPlay muted>
+                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                </video>
+                  </div>
+                  <div >
+                  <video className='h-1/2 w-56' controls autoPlay muted>
+                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                </video>
+                  </div>
+
+                <div>
+                <video className='h-1/2 w-56' controls autoPlay muted>
+                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                </video>
+                </div>
+
+                </div>
+              </div>
+            </div>
+            {/* video tutorials */}
+
+
+            {/* carousel  */}
+               <Carousel />
+
+            {/* carousel  */}
+
 
           </div>
 
