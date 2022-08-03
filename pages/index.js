@@ -1,10 +1,18 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import Carousel from '../components/Carousel'
+import { useState } from 'react';
+import {BsUnlock } from "react-icons/bs";
+import {FaRegCalendarAlt} from "react-icons/fa";
+
+
 
 
 export default function Home() {
+  const [hover, setHover] = useState(false);
+  const [hover1, setHover1] = useState(false);
+  const [hover2, setHover2] = useState(false);
+
   return (
    <div>
         <Head>
@@ -36,10 +44,10 @@ export default function Home() {
               <h2 className='text-4xl font-bold '>#1 Coding <span className='text-orange-400'>Academy</span>  for Kids &amp; <span className='text-orange-400'>Teens</span> </h2>
               <h3 className='text-center text-xl font-bold mt-2'>Online &amp; In-person</h3>
             </div>
-            <div className="flex justify-around text-gray-100">
-              <div className="flex flex-col rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500 ">
+            <div className="flex  justify-around text-gray-100">
+              <div className="flex flex-col rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500  w-2/6 lg:w-full  ">
                 <h2 className='font-bold'>Live Online</h2>
-                <h1 className='text-2xl font-bold'>Bright Mind&apos;s Space</h1>
+                <h1 className='text-2xl font-bold'>Group&apos;s Space</h1>
                 <div className="flex justify-between">
                   <div>
                       <Link href='/profile/classes'>
@@ -58,7 +66,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className='flex flex-col rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500'>
+              <div className='flex flex-col  rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500 w-2/6 lg:w-full '>
                 <h2 className='font-bold'>Summer</h2>
                 <h1  className='text-2xl font-bold'>Classes</h1>
                 <div className="flex justify center w-full">
@@ -77,7 +85,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className='flex justify-between mt-4 mx-24 border-b border-gray-200 pb-12 mb-4 '>
+        <div className='grid grid-cols-2 gap-y-16 gap-x-2 lg:flex justify-between mt-4 lg:mx-24 border-b border-gray-200 pb-12 mb-4 '>
           <div >
             <p className='text-orange-600 text-4xl font-bold text-center'>8</p>
             <h3 className='my-4 text-xl font-semibold text-gray-500 w-28 text-center lg:w-60'>years of Coding with Kids</h3>
@@ -134,11 +142,11 @@ export default function Home() {
               <h2 className="font-semibold text-3xl">
                   TOP-NOTCH <span className='text-orange-500'>COMPUTER SCIENCE</span> PROGRAM
               </h2>
-              <h3 className='text-xl'>
+              <h3 className='text-xl my-4'>
                   Full coding curriculum for ages 5-18
               </h3>
           </div>
-          <div className="flex mx-12 justify-evenly mt-12">
+          <div className="flex flex-col lg:flex-row lg:mx-12 justify-evenly mt-12">
             <div className='text-center flex flex-col'>
                <Image
                   src='/hometutornew2.jpg'    
@@ -218,7 +226,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='px-24 mt-16 '>
+          <div className='lg:px-24 px-2 mt-16 '>
           {/* explore more with coding */}
             <div className='relative '>
                 <div><h2 className='text-xl text-gray-400 mb-6'>Explore more in coding and tech</h2></div>
@@ -241,49 +249,143 @@ export default function Home() {
 
             {/* newslettter */}
             <div className=' mt-16'>
-                <h2 className='font-semibold text-xl mb-8'>Stay in the know on all of our programs and announcements:</h2>
-              <form className='flex justify-between '>
+                <h2 className='font-semibold lg:text-xl mb-8'>Stay in the know on all of our programs and announcements:</h2>
+              <form className='flex flex-wrap lg:flex-nowrap justify-between '>
                 <div className='w-full border border-gray-300 rounded p-1'>
                   <input
                   className='w-full p-2 outline-none '
                   type="text" placeholder='First Name' />
                 </div>
-                <div className='w-full border border-gray-300 rounded p-1 mx-8'>
+                <div className='w-full border border-gray-300 rounded p-1 lg:mx-8'>
                   <input
                    className='w-full p-2 outline-none '
                   type="text" placeholder='Email' />
                 </div>
                 <div className='w-full'>
-                  <button type='submit' className='bg-green-700 text-white hover:bg-green-500 p-3 text-xl rounded'>Sign Up</button>
+                  <button type='submit' className='bg-green-700 text-white hover:bg-green-500 p-3 text-xl w-full rounded'>Sign Up</button>
                 </div>
               </form>
             </div>
             {/* newslettter */}
 
             {/* video tutorials */}
-            <div className='mt-8'>
+            <div className=' mt-20 lg:mt-8'>
               <div>
-                <h2 className='font-bold text-3xl text-center mb-12'>Video Tutorials</h2>
+                <h2 className='font-bold text-3xl text-center  mb-12'>Video Tutorials</h2>
               </div>
               <div>
-                <div className='flex justify-around'>
-                  <div >
-                  <video 
-                  className='h-1/2 w-56'
-                  controls autoPlay muted>
-                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
-                </video>
-                  </div>
-                  <div >
-                  <video className='h-1/2 w-56' controls autoPlay muted>
-                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
-                </video>
+                <div className='flex flex-col lg:flex-row justify-around'>
+                  <div className=' text-center lg:text-left'>
+                      <div
+                        onMouseEnter={(e) => setHover(true)}
+                        onMouseLeave={(e) => setHover(false)}
+                      >
+                        {hover ?
+                          <video className='h-[200px] w-[200px]' controls autoPlay muted>
+                            <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                          </video>          
+                          :
+                          <Image
+                          src='/academykids1.jpg'    
+                          alt="logo" 
+                          width={300}
+                          height={200}
+                          />
+                        }
+                      </div>
+                      <div >
+                        <h3 className='font-bold text-xl mb-4'>Practical and Hands-On Coding</h3>
+                        <div className="flex  text-gray-400 text-sm mb-4 ml-8 lg:ml-0">
+                          <div className="flex items-center mr-1 "><FaRegCalendarAlt/> <span className='mx-4'>{`${new Date().getFullYear()}`}</span> 8:15am  /  </div>
+                          <div className="flex items-center "> <BsUnlock /> <span className='ml-2 text-orange-500'>Free</span>  </div>
+                        </div>
+                        <div>
+                          <p className=' lg:w-72'>
+                            Welcome to the wondeful world of coding.In this first lessons ,
+                            we&apos;ll be learning the basics of coding and what it means
+                            <span className='cursor-pointer'>...more</span>
+                          </p>
+                        </div>
+                      </div>
                   </div>
 
-                <div>
-                <video className='h-1/2 w-56' controls autoPlay muted>
-                  <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
-                </video>
+                <div className=' text-center lg:text-left my-12 lg:my-0'>
+                    <div
+                      onMouseEnter={(e) => setHover1(true)}
+                      onMouseLeave={(e) => setHover1(false)}
+                    >
+                      {hover1 ?
+                        <video className='h-[200px] w-[200px]' controls autoPlay muted>
+                          <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                        </video>          
+                        :
+                        <Image
+                        src='/academykids2.jpg'    
+                        alt="logo" 
+                        width={300}
+                        height={200}
+                        />
+                      }
+                    </div>
+                    <div>
+                        <h3 className='font-bold text-xl mb-4'>On-Site | Online Group Sessions</h3>
+                        <div className="flex  text-gray-400 text-sm mb-4 ml-8 lg:ml-0">
+                          <div className="flex items-center mr-1 "><FaRegCalendarAlt/> <span className='mx-4'>{`${new Date().getFullYear()}`}</span> 8:15am  /  </div>
+                          <div className="flex items-center "> <BsUnlock /> <span className='ml-2 text-orange-500'>Free</span>  </div>
+                        </div>
+                        <div>
+                          <p className=' lg:w-72'>
+                            Group activities including Hackathons, collaborations with other 
+                            coders in the same skill level and sharing your codes with readable
+                            doccumentation of ...<span className='cursor-pointer'>more</span>
+                            <span className='hidden'>
+                             what each line of code does to improve thought process
+                              theres are multiple ways to develop solution for any coding challenges ,
+                              with collboration and knowledge sharing, coders improve their thinking
+                              process by 10%.
+                            </span>
+
+                          </p>
+                        </div>
+                      </div>
+                </div>
+                <div className=' text-center lg:text-left'>
+                    <div
+                      onMouseEnter={(e) => setHover2(true)}
+                      onMouseLeave={(e) => setHover2(false)}
+                    >
+                      {hover2 ?
+                        <video className='h-[200px] w-[200px]' controls autoPlay muted>
+                          <source src="../videos/coffeeandlaptop.mp4" type="video/mp4"/>
+                        </video>          
+                        :
+                        <Image
+                        src='/academykids.jpg'    
+                        alt="logo" 
+                        width={300}
+                        height={200}
+                        />
+                      }
+                    </div>
+                    <div>
+                        <h3 className='font-bold text-xl mb-4'>Coding on IDE</h3>
+                        <div className="flex  text-gray-400 text-sm mb-4 ml-8 lg:ml-0">
+                          <div className="flex items-center mr-1 "><FaRegCalendarAlt/> <span className='mx-4'>{`${new Date().getFullYear()}`}</span> 8:15am  /  </div>
+                          <div className="flex items-center "> <BsUnlock /> <span className='ml-2 text-orange-500'>Free</span>  </div>
+                        </div>
+                        <div>
+                          <p className=' lg:w-72'>
+                            Developing codes on integrated development environment i.e <span>IDE</span> is the 
+                            next step for both web development or software programming
+                            ... <span className='cursor-pointer'>more</span>
+                            <span className='hidden'>
+                              You will learn how to 
+                              choose the right IDE and the keyboards shortcuts to make typing your syntax/code 
+                              smoother, easier and readable 
+                            </span>
+                          </p>
+                        </div>
+                      </div>
                 </div>
 
                 </div>
@@ -293,7 +395,7 @@ export default function Home() {
 
 
             {/* carousel  */}
-               <Carousel />
+               {/* <Carousel /> */}
 
             {/* carousel  */}
 
