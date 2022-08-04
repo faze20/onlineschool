@@ -14,15 +14,15 @@ export default function Home() {
   const [hover2, setHover2] = useState(false);
 
   return (
-   <div>
+   <div className='relative'>
         <Head>
           <title>Coding for Kids</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className='flex  h-screen justify-center relative'>
+        <div className='flex  h-screen justify-center '>
            <Link href='/'> 
               <a 
-              className='relative w-full h-3/4 border border-gray-200 rounded-md overflow-hidden bg-black'
+              className='relative w-full h-full border border-gray-200 rounded-md overflow-hidden bg-black'
               >
                   <Image
                   src='/homePhoto.jpg'    
@@ -39,51 +39,54 @@ export default function Home() {
                   />
               </a>
           </Link>
-          <div className="absolute top-80  ">
-            <div className='text-gray-100 mb-8'>
-              <h2 className='text-4xl font-bold '>#1 Coding <span className='text-orange-400'>Academy</span>  for Kids &amp; <span className='text-orange-400'>Teens</span> </h2>
-              <h3 className='text-center text-xl font-bold mt-2'>Online &amp; In-person</h3>
+             <div className="absolute top-96 lg:top-80  ">
+            <div className='text-gray-100 mb-2 lg:mb-8'>
+              <h2 className=' text-2xl lg:text-4xl font-bold text-center'>#1 Coding <span className='text-orange-400'>Academy</span>  for Kids &amp; <span className='text-orange-400'>Teens</span> </h2>
+              <h3 className='text-center text-base lg:text-xl font-bold mt-2'>Online &amp; In-person</h3>
             </div>
-            <div className="flex  justify-around text-gray-100">
-              <div className="flex flex-col rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500  w-2/6 lg:w-full  ">
-                <h2 className='font-bold'>Live Online</h2>
-                <h1 className='text-2xl font-bold'>Group&apos;s Space</h1>
-                <div className="flex justify-between">
+            <div className="flex justify-around text-gray-100">
+              <div className="flex flex-col rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500  w-5/12 lg:w-2/3 lg:mr-4  ">
+                <h2 className='font-semibold'>Online Classes</h2>
+                <h1 className='text-2xl font-bold mt-4'>Group&apos;s</h1>
+                <div className="lg:flex lg:justify-between lg:w-full mt-6">
                   <div>
                       <Link href='/profile/classes'>
-                          <a className='mr-4 hover:underline hover:text-gray-300'>
-                            Small Group
+                          <a className='border lg:border-0 border-gray-300 rounded p-1 hover:underline hover:text-gray-300'>
+                            Small Group&apos;s
                           </a>
                       </Link>
-
                   </div>
-                  <div>
+                  <div className='mt-4 lg:mt-0'>
                       <Link href='/profile/classes'>
-                          <a className='mr-4 hover:underline hover:text-gray-300'>
+                          <a className='border lg:border-0 border-gray-300 rounded p-1 lg:p-0 hover:underline hover:text-gray-300'>
                             Private Classes
                           </a>
                       </Link>
                   </div>
                 </div>
               </div>
-              <div className='flex flex-col  rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500 w-2/6 lg:w-full '>
-                <h2 className='font-bold'>Summer</h2>
-                <h1  className='text-2xl font-bold'>Classes</h1>
-                <div className="flex justify center w-full">
-                    <Link href='/profile/classes'>
-                        <a className='mr-4 hover:underline hover:text-gray-300'>
-                        Live Online
-                        </a>
-                    </Link>
-                    <Link href='/profile/classes'>
-                        <a className='mr-4 hover:underline hover:text-gray-300'>
-                        In-person Classes
-                        </a>
-                    </Link>
+              <div className='flex flex-col  rounded-md items-center bg-orange-400 hover:bg-orange-700 p-2 duration-500  w-5/12 lg:w-2/3 lg:mr-4 '>
+                <h2 className='font-semibold'>Summer</h2>
+                <h1  className='text-2xl font-bold mt-4'>Classes</h1>
+                <div className="lg:flex lg:justify-between lg:w-full mt-8">
+                  <div>
+                      <Link href='/profile/classes'>
+                          <a className='border lg:border-0 border-gray-300 rounded p-1 hover:underline hover:text-gray-300'>
+                          Live Online
+                          </a>
+                      </Link>
+                  </div>
+                  <div className='mt-4 lg:mt-0'>
+                      <Link href='/profile/classes'>
+                          <a className='border lg:border-0 border-gray-300 rounded p-1 hover:underline hover:text-gray-300'>
+                          In-person Classes
+                          </a>
+                      </Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+              </div>
         </div>
         <div className='grid grid-cols-2 gap-y-16 gap-x-2 lg:flex justify-between mt-4 lg:mx-24 border-b border-gray-200 pb-12 mb-4 '>
           <div >

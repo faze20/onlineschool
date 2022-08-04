@@ -50,7 +50,7 @@ function Nav() {
                         </div>
                         <div>
                             <Link href='/curriculum'>
-                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Curriculum</a>
+                                <a className='bg-gray-200 py-1 px-2 mr-4 rounded hover:underline border hover:border-orange-600'>Courses</a>
                             </Link>
                         </div>
                         <div>
