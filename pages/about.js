@@ -4,8 +4,21 @@ import Link from 'next/link'
 function About() {
   return (
     <div className='px-2'>
+      <div >
+        <Image
+          src='/about.jpg'    
+          alt="logo" 
+          width={100}
+          height={500}
+          layout="responsive"
+          objectFit="contain"
+          quality={100}
+          priority
+          />
+
+      </div>
         <h2 className='font-bold text-2xl mt-4'>About Softwaredev Bytes Academy</h2>
-            <div className="flex items-center justify-center mt-8 mb-12">
+            {/* <div className="flex items-center justify-center mt-8 mb-12">
                 <Link href='/'> 
                     <a className='mt-2'>
                         <Image
@@ -17,7 +30,7 @@ function About() {
                         />
                     </a>
                 </Link>
-            </div>
+            </div> */}
     </div>
   )
 }
