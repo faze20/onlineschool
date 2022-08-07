@@ -27,10 +27,6 @@ export default function Home() {
                   <Image
                   src='/homePhoto.jpg'    
                   alt="logo" 
-                  // width={1280}
-                  // height={400}
-                  // layout='responsive'
-                  // objectFit='contain'
                   layout="fill"
                   objectFit="cover"
                   quality={100}
