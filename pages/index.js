@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react';
 import {BsUnlock } from "react-icons/bs";
 import {FaRegCalendarAlt} from "react-icons/fa";
+import CarouselComponent from '../components/Carousel';
 
 
 
@@ -393,10 +394,8 @@ export default function Home() {
             {/* video tutorials */}
 
 
-            {/* carousel  */}
-               {/* <Carousel /> */}
+               <CarouselComponent />
 
-            {/* carousel  */}
 
 
           </div>
