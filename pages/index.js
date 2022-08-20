@@ -396,6 +396,191 @@ export default function Home() {
 
                <CarouselComponent />
 
+                         {/* explore more with coding */}
+            <div className='relative '>
+                <div><h2 className='text-xl text-gray-400 mb-6'>Explore more in coding and tech</h2></div>
+                <div className="flex  w-full overflow-x-auto no-scrollbar p-2 bg-gray-100 rounded mx-2 " title='click then use keyboard arrows to scroll'>
+
+                <div className='text-center  flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center  mx-4 flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center   flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center mx-4 flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center  flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center mx-4 flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                <div className='text-center  flex flex-col'>
+                  <Image
+                      src='/hometutornew.jpg'    
+                      alt="logo" 
+                      width={300}
+                      height={200}
+                      />
+                      <div className='bg-yellow-400'>
+                        <h1>Web Design</h1>
+                        <h2 className='font-semibold text-4xl'>Websites</h2>
+                      </div>
+                      <div>
+                        <p>Offered during school breaks</p>
+                        <p className='border-2-2 border-orange-900'>Ages 5-18</p>
+                      </div>
+                      <div>
+                        <h2>Live online</h2>
+                        <p>8-week sessions</p>
+                        <p>One week, Mon-Fri</p>
+                      </div>
+                      <div>
+                        <p>Starting at $50 per class</p>
+                        <p>Starting at $325 for a 8-week session</p>
+                      </div>
+                </div>
+                  <div className='absolute top-16 right-1 z-10'><span title='click then use keyboard arrows to scroll' className='font-bold text-base  bg-gray-600 text-white  border-2 border-black rounded-full'> &#62;</span></div>
+                </div>
+            </div>
+            {/* explore more with coding */}
+
 
 
           </div>

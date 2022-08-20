@@ -1,12 +1,12 @@
-import Editor from '../components/Editor'
+import Editor from '../components/codeEditor/CodeEditorWindow'
 
 import { useState } from "react";
 // import { render } from "react-dom";
 
-import { split as SplitEditor } from "react-ace";
+// import { split as SplitEditor } from "react-ace";
 
-import "ace-builds/src-noconflict/mode-java";
-import "ace-builds/src-noconflict/theme-github";
+// import "ace-builds/src-noconflict/mode-java";
+// import "ace-builds/src-noconflict/theme-github";
 
 
 
@@ -31,14 +31,14 @@ function Labs() {
     const [htmlValue , setHtmlValue] = useState('')
     const [cssValue , setCSSValue] = useState('')
 
-    if (typeof window === 'undefined') {
-        return (
-            <div>
-                <h2>Lab</h2>
-            </div>
-        )
-    }
-    console.log(typeof(window))
+    // if (typeof window === 'undefined') {
+    //     return (
+    //         <div>
+    //             <h2>Lab</h2>
+    //         </div>
+    //     )
+    // }
+    // console.log(typeof(window))
     
     const onChange= (newValue)=> {
         console.log("change", newValue);
