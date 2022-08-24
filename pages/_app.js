@@ -2,6 +2,8 @@ import Layout from '../components/Layout'
 import Head from 'next/head'
 import { ContextProvider  } from '../context'
 import '../styles/globals.css'
+// import 'codemirror/lib/codemirror.css'
+// import 'codemirror/theme/monokai.css';
 
 function MyApp({ Component, pageProps }) {
   return (

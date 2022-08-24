@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-function Curriculum() {
+function index() {
   return (
     <div className='px-2'>
         <h2 className='font-bold text-2xl mt-4'>Curriculum and Classes</h2>
@@ -22,4 +22,4 @@ function Curriculum() {
   )
 }
 
-export default Curriculum
+export default index

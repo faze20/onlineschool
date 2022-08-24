@@ -17,32 +17,32 @@ function Footer() {
           <h2 className='font-semibold text-2xl mb-4'>Learn</h2>
             <ul className='space-y-2 text-sm lg:text-base'>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn'>
                   <a> Explore Classes</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn/categories'>
                   <a> Explore Categories</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn/sponsorstudents'>
                   <a> Sponsor a Student</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn/homeschool'>
                   <a> Homeschool Classes</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn/financialassisstance'>
                   <a> Financial Assistance</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/learn/giftcards'>
                   <a> Give a Gift Card</a>
                 </Link>
               </li>
@@ -52,32 +52,32 @@ function Footer() {
             <h2 className='font-semibold text-2xl mb-4'>About </h2>
             <ul className='space-y-2 text-sm lg:text-base'>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about/company'>
                   <a> Company</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about/careers'>
                   <a> Careers</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about/blog'>
                   <a> Blog</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about/press'>
                   <a> Press</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about'>
                   <a className='flex items-center'>Download IOS App <BsCloudDownload className='lg:ml-2'/></a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/about'>
                   <a className='flex items-center'>Download Android App <BsCloudDownload className='lg:ml-2'/></a>
                 </Link>
               </li>
@@ -87,27 +87,27 @@ function Footer() {
             <h2 className='font-semibold text-2xl mb-4'>Grade Levels</h2>
             <ul className='space-y-2 text-sm lg:text-base'>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/courses/index'>
                   <a> Pre-K</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/courses/k2primary'>
                   <a> K-2 Primary</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/courses/firstmidschool'>
                   <a> 3-5 Middle School</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/courses/secondmidschool'>
                   <a> 6-8 Middle School</a>
                 </Link>
               </li>
               <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/courses/highschool'>
                   <a> 9-12 High School</a>
                 </Link>
               </li>
@@ -117,27 +117,27 @@ function Footer() {
             <h2 className='font-semibold text-2xl mb-4'>Support</h2>
             <ul className='space-y-2 text-sm lg:text-base'>
             <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/support/help'>
                   <a> Help</a>
                 </Link>
               </li>
             <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/support/safety'>
                   <a> Safety</a>
                 </Link>
               </li>
             <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/support/privacy'>
                   <a> Privacy</a>
                 </Link>
               </li>
             <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/support/privacy'>
                   <a> Learner Privacy</a>
                 </Link>
               </li>
             <li className='hover:underline hover:text-gray-400' >
-                <Link href='/'>
+                <Link href='/support/termsandconditions'>
                   <a> Terms</a>
                 </Link>
               </li>
@@ -154,13 +154,13 @@ function Footer() {
             <div className='flex items-center mt-2'>
               <div className="flex underline text-xs">
                 <div>
-                  <Link href='/'>
+                  <Link href='/support/privacy'>
                       <a className='hover:text-black'>Privacy Policy</a>
                   </Link>
                 </div>
                 <p className='mx-2'> |  </p>
                 <div>
-                  <Link href='/'>
+                  <Link href='/support/termsandconditions'>
                       <a className='hover:text-black'>Terms</a>
                   </Link>
                 </div>
